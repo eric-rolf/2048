@@ -21,3 +21,25 @@ postfix operator >*
 postfix func >*<V>(lhs: V) -> AnyView where V: View {
     return lhs.eraseToAnyView()
 }
+
+//Logic.Direction
+extension DragGesture {
+
+    static func direction(minimumDistance: CGFloat = 44, translation: CGSize) -> Logic.Direction {
+        
+        guard abs(translation.width) > minimumDistance ||
+            abs(translation.height) > minimumDistance else { return .none }
+        
+        if translation.width > minimumDistance {
+            return .right
+        } else if translation.width < -minimumDistance {
+            return .left
+        } else if translation.height > minimumDistance {
+            return .down
+        } else if translation.height < -minimumDistance {
+            return .up
+        }
+        return .up
+    }
+
+}

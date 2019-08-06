@@ -22,6 +22,7 @@ final class Logic: ObservableObject {
         case right
         case up
         case down
+        case none
     }
         
     fileprivate var _blockMatrix: MatrixBlockType!

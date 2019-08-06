@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		640A81CD22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640A81CC22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift */; };
-		640A81CF22F88CCE0036F10A /* UIKeyCommandExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640A81CE22F88CCE0036F10A /* UIKeyCommandExtensions.swift */; };
 		6455D1C222E75208006FD6DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1C122E75208006FD6DE /* AppDelegate.swift */; };
 		6455D1C422E75208006FD6DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1C322E75208006FD6DE /* SceneDelegate.swift */; };
 		6455D1CB22E7520A006FD6DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6455D1CA22E7520A006FD6DE /* Assets.xcassets */; };
@@ -46,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		640A81CC22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyCommandHostingViewController.swift; sourceTree = "<group>"; };
-		640A81CE22F88CCE0036F10A /* UIKeyCommandExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyCommandExtensions.swift; sourceTree = "<group>"; };
 		6455D1BE22E75208006FD6DE /* Swift_2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swift_2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6455D1C122E75208006FD6DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6455D1C322E75208006FD6DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 				6455D20622E76F9C006FD6DE /* FunctionalUtils.swift */,
 				6455D20722E76F9C006FD6DE /* SwiftUIExtensions.swift */,
 				640A81CC22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift */,
-				640A81CE22F88CCE0036F10A /* UIKeyCommandExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -329,7 +326,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				640A81CF22F88CCE0036F10A /* UIKeyCommandExtensions.swift in Sources */,
 				6455D20522E76EFE006FD6DE /* GridView.swift in Sources */,
 				6455D1FD22E755AA006FD6DE /* BlockIdentified.swift in Sources */,
 				6455D20822E76F9C006FD6DE /* FunctionalUtils.swift in Sources */,

@@ -13,7 +13,7 @@ extension Edge {
         switch from {
         case .down:
             return .top
-        case .up:
+        case .up, .none:
             return .bottom
         case .left:
             return .trailing
@@ -54,30 +54,20 @@ struct GameView : View {
         
     var gesture: some Gesture {
         let threshold: CGFloat = 44
-        let drag = DragGesture()
+        let drag = DragGesture(minimumDistance: threshold)
             .onChanged { v in
                 guard !self.ignoreGesture else { return }
-                guard abs(v.translation.width) > threshold ||
-                    abs(v.translation.height) > threshold else { return }
-                
-                withTransaction(Transaction()) {
-                    self.ignoreGesture = true
-                    if v.translation.width > threshold {
-                        // Move right
-                        self.gameLogic.move(.right)
-                    } else if v.translation.width < -threshold {
-                        // Move left
-                        self.gameLogic.move(.left)
-                    } else if v.translation.height > threshold {
-                        // Move down
-                        self.gameLogic.move(.down)
-                    } else if v.translation.height < -threshold {
-                        // Move up
-                        self.gameLogic.move(.up)
-                    }
-                }
+                self.ignoreGesture = true
         }
-        .onEnded { _ in self.ignoreGesture = false }
+        .onEnded { v in
+            withTransaction(Transaction()) {
+                let direction = DragGesture.direction(minimumDistance: threshold,
+                                                      translation: v.translation)
+                self.gameLogic.move(direction)
+                self.ignoreGesture = false
+            }
+        }
+            
         return drag
     }
     

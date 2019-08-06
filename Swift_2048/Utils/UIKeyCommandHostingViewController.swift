@@ -35,3 +35,20 @@ class UIKeyCommandHostingController: UIHostingController<GameView> {
     }
     
 }
+
+extension UIKeyCommand {
+    
+    var moveDirection: Logic.Direction {
+        switch self.input  {
+        case UIKeyCommand.inputUpArrow, "w":
+            return .up
+        case UIKeyCommand.inputDownArrow, "s":
+            return .down
+        case UIKeyCommand.inputLeftArrow, "a":
+            return .left
+        default:
+            return .right
+        }
+    }
+    
+}
