@@ -202,7 +202,7 @@ final class Logic: ObservableObject {
     }
     
     fileprivate func placeDefaultBlock(blankLocations: inout [MatrixBlockType.Index], at index: Int) {
-        blockMatrix.place(BlockIdentified(id: newGlobalID, number: 2), to: blankLocations[index])
+        blockMatrix.place(BlockIdentified(id: newGlobalID, number: Bool.random() ? 2 : 4), to: blankLocations[index])
     }
     
 }
