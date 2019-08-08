@@ -55,7 +55,8 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
     
     subscript(index: Self.Index) -> T? {
         guard isIndexValid(index) else { return nil }
-        return matrix[index.1][index.0]
+        guard let item = matrix[index.1][index.0] else { return nil }
+        return item
     }
     
     /// Move the block to specific location and leave the original location blank.
