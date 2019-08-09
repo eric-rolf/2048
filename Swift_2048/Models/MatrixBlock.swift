@@ -22,7 +22,7 @@ struct IndexedBlock<T> where T: Block {
 
 struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
     typealias Index = (Int, Int)
-    fileprivate var matrix: [[T?]]
+    private var matrix: [[T?]]
     
     init() {
         matrix = [[T?]]()
@@ -92,7 +92,7 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
         matrix[to.1][to.0] = block
     }
     
-    fileprivate func isIndexValid(_ index: Self.Index) -> Bool {
+    private func isIndexValid(_ index: Self.Index) -> Bool {
         return index.0 >= 0 && index.0 < 4 || index.1 >= 0 && index.1 < 4
     }
     

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// ViewModifier that scales from an anchor point.
 struct AnchoredScale : ViewModifier {
     
     let scaleFactor: CGFloat
@@ -19,6 +20,8 @@ struct AnchoredScale : ViewModifier {
     
 }
 
+
+/// Allows concatted ViewModifiers.
 struct MergedViewModifier<M1, M2> : ViewModifier where M1: ViewModifier, M2: ViewModifier {
     
     let m1: M1
@@ -63,6 +66,8 @@ struct GridView : View {
     
     let matrix: Self.SupportingMatrix
     let blockEnterEdge: Edge
+    let proxy: GeometryProxy
+    let boardSize: CGFloat = 0
     
     func createBlock(_ block: BlockIdentified?, at index: IndexedBlock<BlockIdentified>.Index) -> some View {
         let blockView: BlockView
@@ -72,10 +77,9 @@ struct GridView : View {
             blockView = BlockView.blank()
         }
         
-        // TODO: Still need refactor, hard-codedsize!!
-        let blockSize: CGFloat = 65
-        let spacing: CGFloat = 12
-        let boardSize: CGFloat = 320
+        let blockSize: CGFloat = proxy.gridMetrics().blockSize
+        let boardSize: CGFloat = proxy.gridMetrics().boardSize
+        let spacing: CGFloat = proxy.gridMetrics().spacing
         
         let position = CGPoint(
             x: CGFloat(index.0) * (blockSize + spacing) + blockSize / 2 + spacing,
@@ -93,7 +97,7 @@ struct GridView : View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             // Background grid blocks:
             ForEach(0..<4) { x in
                 ForEach(0..<4) { y in
@@ -109,7 +113,7 @@ struct GridView : View {
             .zIndex(1000)
             .animation(.spring())
         }
-        .frame(width: 320, height: 320, alignment: .center)
+        .frame(width: proxy.gridMetrics().boardSize, height: proxy.gridMetrics().boardSize, alignment: .center)
         .background(
             Rectangle()
                 .fill(Color.playfield)
@@ -138,8 +142,10 @@ struct BlockGridView_Previews : PreviewProvider {
     }
     
     static var previews: some View {
-        GridView(matrix: matrix, blockEnterEdge: .top)
-            .previewLayout(.sizeThatFits)
+        GeometryReader { proxy in
+            GridView(matrix: matrix, blockEnterEdge: .top, proxy: proxy)
+                .previewLayout(.sizeThatFits)
+        }
     }
     
 }

@@ -15,7 +15,7 @@ final class Logic: ObservableObject {
     let objectWillChange = PassthroughSubject<Logic, Never>()
     typealias MatrixBlockType = MatrixBlock<BlockIdentified>
     
-    enum Direction: String {
+    enum Direction {
         case left
         case right
         case up
@@ -23,11 +23,11 @@ final class Logic: ObservableObject {
         case none
     }
     
-    fileprivate(set) var blockMatrix: MatrixBlockType!
-    fileprivate(set) var lastGestureDirection: Direction = .up
+    private(set) var blockMatrix: MatrixBlockType!
+    private(set) var lastGestureDirection: Direction = .up
     
-    fileprivate var _globalID = 0
-    fileprivate var newGlobalID: Int {
+    private var _globalID = 0
+    private var newGlobalID: Int {
         _globalID += 1
         return _globalID
     }
@@ -42,14 +42,14 @@ final class Logic: ObservableObject {
         return blockMatrix.flatten.filter({ $0.item.number == 2048}).count == 1 && continueGame == false
     }
     
-    fileprivate(set) var hasLost: Bool = false
-    
-    fileprivate(set) var score: Int = 0
+    private(set) var hasLost: Bool = false
+    private(set) var score: Int = 0
     
     init() {
         newGame()
     }
     
+    /// Start a new game
     func newGame() {
         blockMatrix = MatrixBlockType()
         score = 0
@@ -59,6 +59,8 @@ final class Logic: ObservableObject {
         objectWillChange.send(self)
     }
     
+    /// Used to move the peices on the playboard in a specific direction
+    /// - Parameter direction: Logic.Direction enum that indicates a movement direction (.up, .down, .left, .right)
     func move(_ direction: Direction) {
         defer {
             objectWillChange.send(self)
@@ -105,14 +107,11 @@ final class Logic: ObservableObject {
             }
         }
         
-        if moved {
-            generateNewBlocks()
-        }
-        
+        generateNewBlocks(moved: moved)
         self.hasLost = check(gameOver: blockMatrix)
     }
     
-    fileprivate func merge(blocks: inout [BlockIdentified], reverse: Bool) {
+    private func merge(blocks: inout [BlockIdentified], reverse: Bool) {
         if reverse {
             blocks = blocks.reversed()
         }
@@ -140,7 +139,7 @@ final class Logic: ObservableObject {
         }
     }
     
-    fileprivate func check(gameOver blockMatrix: MatrixBlockType) -> Bool {
+    private func check(gameOver blockMatrix: MatrixBlockType) -> Bool {
         for row in 0..<4 {
             for col in 0..<4 {
                 guard let block = blockMatrix[(row, col)] else {
@@ -167,7 +166,8 @@ final class Logic: ObservableObject {
         return true
     }
     
-    @discardableResult fileprivate func generateNewBlocks() -> Bool {
+    private func generateNewBlocks(moved: Bool = true) {
+        if !moved { return }
         defer {
             objectWillChange.send(self)
         }
@@ -181,27 +181,23 @@ final class Logic: ObservableObject {
             }
         }
         
-        guard blankLocations.count >= 1 else {
-            return false
-        }
+        guard blankLocations.count >= 1 else { return }
         
         // Place the first block.
         var placeLocIndex = Int.random(in: 0..<blankLocations.count)
         placeDefaultBlock(blankLocations: &blankLocations, at: placeLocIndex)
         
         // Place the second block if needed.
-        if (blockMatrix.flatten.count > 1) { return false }
+        if (blockMatrix.flatten.count > 1) { return }
         
-        guard let lastLoc = blankLocations.last else { return false }
+        guard let lastLoc = blankLocations.last else { return }
         
         blankLocations[placeLocIndex] = lastLoc
         placeLocIndex = Int.random(in: 0..<(blankLocations.count - 1))
         placeDefaultBlock(blankLocations: &blankLocations, at: placeLocIndex)
-        
-        return true
     }
     
-    fileprivate func placeDefaultBlock(blankLocations: inout [MatrixBlockType.Index], at index: Int) {
+    private func placeDefaultBlock(blankLocations: inout [MatrixBlockType.Index], at index: Int) {
         blockMatrix.place(BlockIdentified(id: newGlobalID, number: Bool.random() ? 2 : 4), to: blankLocations[index])
     }
     

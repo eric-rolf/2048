@@ -100,7 +100,8 @@ struct GameView : View {
                     
                     ZStack(alignment: .center) {
                         GridView(matrix: self.gameLogic.blockMatrix,
-                                 blockEnterEdge: .from(self.gameLogic.lastGestureDirection))
+                                 blockEnterEdge: .from(self.gameLogic.lastGestureDirection),
+                                 proxy: proxy)
                         
                         if self.gameLogic.hasWon || self.gameLogic.hasLost {
                             ZStack(alignment: .center) {
@@ -125,7 +126,7 @@ struct GameView : View {
                             }.background(
                                 Rectangle()
                                     .fill(Color.playfield)
-                                    .frame(width: 320, height: 320, alignment: .center)
+                                    .frame(width: proxy.gridMetrics().boardSize, height: proxy.gridMetrics().boardSize, alignment: .center)
                                     .clipped()
                                     .cornerRadius(6)
                                     .opacity(0.9)

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Structure to specificly identify a block.
 struct BlockIdentified: Block {
     let id: Int
     var number: Int
