@@ -60,3 +60,38 @@ extension GeometryProxy {
     }
     
 }
+
+extension Color {
+    
+    init(named: String) {
+        if let color = UIColor(named: named) {
+            self.init(Color.RGBColorSpace.sRGB, red: color.components.red, green: color.components.green, blue: color.components.blue, opacity: color.components.alpha)
+        } else {
+            self.init(Color.RGBColorSpace.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
+        }
+    }
+    
+    static func color(for direction: Logic.Direction) -> Color {
+        switch direction {
+        case .up:
+            return Color.yellow
+        case .down:
+            return Color.pink
+        case .left:
+            return Color.orange
+        case .right:
+            return Color.green
+        case .none:
+            return Color.black
+        }
+    }
+    
+}
+
+extension UIColor {
+    var components: (red: Double, green: Double, blue: Double, alpha: Double) {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        return (Double(r),Double(g),Double(b),Double(a))
+    }
+}

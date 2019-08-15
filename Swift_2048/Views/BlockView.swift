@@ -14,24 +14,7 @@ struct BlockView: View {
         let primary: Color
         let secondary: Color
     }
-    
-    private let colorScheme: [ColorPair] = [
-        ColorPair(primary: .p2, secondary: .s2),
-        ColorPair(primary: .p4, secondary: .s4),
-        ColorPair(primary: .p8, secondary: .s8),
-        ColorPair(primary: .p16, secondary: .s16),
-        ColorPair(primary: .p32, secondary: .s32),
-        ColorPair(primary: .p64, secondary: .s64),
-        ColorPair(primary: .p128, secondary: .s128),
-        ColorPair(primary: .p256, secondary: .s256),
-        ColorPair(primary: .p512, secondary: .s512),
-        ColorPair(primary: .p1024, secondary: .s1024),
-        ColorPair(primary: .p2048, secondary: .s2048),
-        ColorPair(primary: .p4096, secondary: .s4096),
-        ColorPair(primary: .p8192, secondary: .s8192),
-        ColorPair(primary: .p16384, secondary: .s16384),
-    ]
-    
+        
     fileprivate let number: Int?
     fileprivate let textId: String?
     
@@ -67,13 +50,10 @@ struct BlockView: View {
     
     private var colorPair: ColorPair {
         guard let number = number else {
-            return ColorPair(primary: .emptyCell, secondary: .black)
+            return ColorPair(primary: Color(named: "emptyCell"), secondary: .black)
         }
-        let index = Int(log2(Double(number))) - 1
-        if index < 0 || index >= colorScheme.count {
-            fatalError("No color for such number")
-        }
-        return colorScheme[index]
+        
+        return ColorPair(primary: Color(named: "\(number)p"), secondary: Color(named: "\(number)s"))
     }
     
     // MARK: Body

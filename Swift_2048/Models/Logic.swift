@@ -10,16 +10,16 @@ import Foundation
 import Combine
 import SwiftUI
 
-final class Logic: ObservableObject {
+final class Logic: ObservableObject, Identifiable {
     
     let objectWillChange = PassthroughSubject<Logic, Never>()
     typealias MatrixBlockType = MatrixBlock<BlockIdentified>
     
-    enum Direction {
-        case left
-        case right
-        case up
-        case down
+    enum Direction: String, CaseIterable {
+        case left = "Left"
+        case right = "Right"
+        case up =  "Up"
+        case down = "Down"
         case none
     }
     
@@ -42,8 +42,33 @@ final class Logic: ObservableObject {
         return blockMatrix.flatten.filter({ $0.item.number == 2048}).count == 1 && continueGame == false
     }
     
+    var largestNumberColor: String {
+        return "\(blockMatrix.flatten.map { $0.item.number }.max() ?? 2)p"
+    }
+    
     private(set) var hasLost: Bool = false
     private(set) var score: Int = 0
+    
+    private var _moveHistory = [Direction]()
+    var moveHistory: [Direction] {
+        _moveHistory
+    }
+    
+    var bars: [Bar] {
+        var b = [Bar]()
+        let histogram = _moveHistory.histogram
+        for key in Direction.allCases {
+            guard key != .none else { break }
+            if let value = histogram[key] {
+                b.append(Bar(id: UUID(), value: Double(value), label: key.rawValue, legend: Legend(color: Color.color(for: key), label: key.rawValue)) )
+            } else {
+                b.append(Bar(id: UUID(), value: 0.0, label: key.rawValue, legend: Legend(color: Color.color(for: key), label: key.rawValue)) )
+            }
+        }
+        return b.sorted { (a, b) -> Bool in
+            a.label < b.label
+        }
+    }
     
     init() {
         newGame()
@@ -52,6 +77,7 @@ final class Logic: ObservableObject {
     /// Start a new game
     func newGame() {
         blockMatrix = MatrixBlockType()
+        _moveHistory.removeAll()
         score = 0
         hasLost = false
         continueGame = false
@@ -66,6 +92,11 @@ final class Logic: ObservableObject {
             objectWillChange.send(self)
         }
         
+        if hasLost {
+            return
+        }
+        
+        _moveHistory.append(direction)
         lastGestureDirection = direction
         
         var moved = false

@@ -19,11 +19,18 @@
 		6455D1FB22E754D2006FD6DE /* MatrixBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1FA22E754D2006FD6DE /* MatrixBlock.swift */; };
 		6455D1FD22E755AA006FD6DE /* BlockIdentified.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1FC22E755AA006FD6DE /* BlockIdentified.swift */; };
 		6455D1FF22E7573F006FD6DE /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1FE22E7573F006FD6DE /* BlockView.swift */; };
-		6455D20122E7591A006FD6DE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D20022E7591A006FD6DE /* Colors.swift */; };
 		6455D20322E76EDC006FD6DE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D20222E76EDC006FD6DE /* GameView.swift */; };
 		6455D20522E76EFE006FD6DE /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D20422E76EFE006FD6DE /* GridView.swift */; };
 		6455D20822E76F9C006FD6DE /* FunctionalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D20622E76F9C006FD6DE /* FunctionalUtils.swift */; };
 		6455D20922E76F9C006FD6DE /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D20722E76F9C006FD6DE /* SwiftUIExtensions.swift */; };
+		6466A38F230435E100ACF249 /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A38E230435E100ACF249 /* InsightsView.swift */; };
+		6466A39123043B1200ACF249 /* ProgressShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39023043B1200ACF249 /* ProgressShape.swift */; };
+		6466A39323043B3500ACF249 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39223043B3500ACF249 /* ProgressView.swift */; };
+		6466A39523043B6A00ACF249 /* ChartModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39423043B6A00ACF249 /* ChartModels.swift */; };
+		6466A39723043B8E00ACF249 /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39623043B8E00ACF249 /* BarsView.swift */; };
+		6466A39923043BC700ACF249 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39823043BC700ACF249 /* LegendView.swift */; };
+		6466A39B23043BF400ACF249 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39A23043BF300ACF249 /* BarChartView.swift */; };
+		6466A39E23043D8900ACF249 /* LabelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6466A39D23043D8900ACF249 /* LabelsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +69,18 @@
 		6455D1FA22E754D2006FD6DE /* MatrixBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixBlock.swift; sourceTree = "<group>"; };
 		6455D1FC22E755AA006FD6DE /* BlockIdentified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockIdentified.swift; sourceTree = "<group>"; };
 		6455D1FE22E7573F006FD6DE /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
-		6455D20022E7591A006FD6DE /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6455D20222E76EDC006FD6DE /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		6455D20422E76EFE006FD6DE /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		6455D20622E76F9C006FD6DE /* FunctionalUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionalUtils.swift; sourceTree = "<group>"; };
 		6455D20722E76F9C006FD6DE /* SwiftUIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIExtensions.swift; sourceTree = "<group>"; };
+		6466A38E230435E100ACF249 /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
+		6466A39023043B1200ACF249 /* ProgressShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShape.swift; sourceTree = "<group>"; };
+		6466A39223043B3500ACF249 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		6466A39423043B6A00ACF249 /* ChartModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartModels.swift; sourceTree = "<group>"; };
+		6466A39623043B8E00ACF249 /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
+		6466A39823043BC700ACF249 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
+		6466A39A23043BF300ACF249 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		6466A39D23043D8900ACF249 /* LabelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +175,7 @@
 				6455D1F822E75462006FD6DE /* Logic.swift */,
 				6455D1FA22E754D2006FD6DE /* MatrixBlock.swift */,
 				6455D1FC22E755AA006FD6DE /* BlockIdentified.swift */,
+				6466A39423043B6A00ACF249 /* ChartModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -171,6 +186,8 @@
 				6455D1FE22E7573F006FD6DE /* BlockView.swift */,
 				6455D20422E76EFE006FD6DE /* GridView.swift */,
 				6455D20222E76EDC006FD6DE /* GameView.swift */,
+				6466A38E230435E100ACF249 /* InsightsView.swift */,
+				6466A39C23043C0400ACF249 /* ChartView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,7 +195,6 @@
 		6455D1F622E75422006FD6DE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				6455D20022E7591A006FD6DE /* Colors.swift */,
 				6455D20622E76F9C006FD6DE /* FunctionalUtils.swift */,
 				6455D20722E76F9C006FD6DE /* SwiftUIExtensions.swift */,
 				640A81CC22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift */,
@@ -193,6 +209,19 @@
 				6455D1C322E75208006FD6DE /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6466A39C23043C0400ACF249 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				6466A39023043B1200ACF249 /* ProgressShape.swift */,
+				6466A39223043B3500ACF249 /* ProgressView.swift */,
+				6466A39623043B8E00ACF249 /* BarsView.swift */,
+				6466A39823043BC700ACF249 /* LegendView.swift */,
+				6466A39A23043BF300ACF249 /* BarChartView.swift */,
+				6466A39D23043D8900ACF249 /* LabelsView.swift */,
+			);
+			path = ChartView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,10 +356,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6455D20522E76EFE006FD6DE /* GridView.swift in Sources */,
+				6466A39E23043D8900ACF249 /* LabelsView.swift in Sources */,
+				6466A39B23043BF400ACF249 /* BarChartView.swift in Sources */,
+				6466A39923043BC700ACF249 /* LegendView.swift in Sources */,
+				6466A38F230435E100ACF249 /* InsightsView.swift in Sources */,
+				6466A39523043B6A00ACF249 /* ChartModels.swift in Sources */,
+				6466A39723043B8E00ACF249 /* BarsView.swift in Sources */,
+				6466A39323043B3500ACF249 /* ProgressView.swift in Sources */,
+				6466A39123043B1200ACF249 /* ProgressShape.swift in Sources */,
 				6455D1FD22E755AA006FD6DE /* BlockIdentified.swift in Sources */,
 				6455D20822E76F9C006FD6DE /* FunctionalUtils.swift in Sources */,
 				640A81CD22F87C5B0036F10A /* UIKeyCommandHostingViewController.swift in Sources */,
-				6455D20122E7591A006FD6DE /* Colors.swift in Sources */,
 				6455D1FB22E754D2006FD6DE /* MatrixBlock.swift in Sources */,
 				6455D1F922E75462006FD6DE /* Logic.swift in Sources */,
 				6455D20322E76EDC006FD6DE /* GameView.swift in Sources */,

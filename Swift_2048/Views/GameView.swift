@@ -26,6 +26,7 @@ extension Edge {
 struct GameView : View {
     
     @State var ignoreGesture = false
+    @State var insightsPresented = false
     @ObservedObject var gameLogic: Logic = Logic()
     
     fileprivate struct LayoutTraits {
@@ -33,6 +34,7 @@ struct GameView : View {
         let newOffset: CGSize
         let containerAlignment: Alignment
         let scoreOffset: CGSize
+        let insightsOffset: CGSize
     }
     
     fileprivate func layoutTraits(`for` proxy: GeometryProxy) -> LayoutTraits {
@@ -48,7 +50,10 @@ struct GameView : View {
             containerAlignment: landscape ? .leading : .top,
             scoreOffset: landscape
                 ? .init(width: proxy.safeAreaInsets.leading + 32, height: 40)
-                : .init(width: 0, height: proxy.safeAreaInsets.top + 72)
+                : .init(width: 0, height: proxy.safeAreaInsets.top + 72),
+            insightsOffset: landscape
+            ? .init(width: proxy.size.width - proxy.safeAreaInsets.trailing - 250, height: 0)
+            : .init(width: 0, height: proxy.size.height - proxy.safeAreaInsets.bottom - 150)
         )
     }
         
@@ -78,21 +83,21 @@ struct GameView : View {
                     VStack{
                         Text("2048")
                             .font(Font.system(size: 48).weight(.black))
-                            .foregroundColor(Color.pFont)
+                            .foregroundColor(Color(named: "primaryFont"))
                         VStack {
                             Text("Score")
                                 .font(Font.system(size: 16).weight(.medium))
-                                .foregroundColor(Color.pBackground)
+                                .foregroundColor(Color(named: "primaryBackground"))
                             
                             Text("\(self.gameLogic.score)")
                                 .font(Font.system(size: 26).weight(.black))
-                                .foregroundColor(Color.pBackground)
+                                .foregroundColor(Color(named: "primaryBackground"))
                                 .frame(width: 150, height: nil, alignment: .center)
                         }
                         .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                        .foregroundColor(Color.pBackground)
+                        .foregroundColor(Color(named: "primaryBackground"))
                         .background(
-                            Rectangle().fill(Color.playfield)
+                            Rectangle().fill(Color(named: "playfield"))
                         )
                             .cornerRadius(6)
                     }
@@ -108,7 +113,7 @@ struct GameView : View {
                                 VStack {
                                     Text(self.gameLogic.hasWon ? "You Win!!" : self.gameLogic.hasLost ? "Game Over" : "")
                                         .font(Font.system(size: 48).weight(.black))
-                                        .foregroundColor(Color.pFont)
+                                        .foregroundColor(Color(named: "primaryFont"))
                                     
                                     if self.gameLogic.hasWon && self.gameLogic.continueGame == false {
                                         Button("Keep going", action: {
@@ -116,16 +121,16 @@ struct GameView : View {
                                         })
                                             .padding(6)
                                             .font(Font.system(size: 22).weight(.black))
-                                            .foregroundColor(Color.pBackground)
+                                            .foregroundColor(Color(named: "primaryBackground"))
                                             .background(
-                                                Rectangle().fill(Color.pFont)
+                                                Rectangle().fill(Color(named: "primaryFont"))
                                         )
                                             .cornerRadius(6)
                                     }
                                 }
                             }.background(
                                 Rectangle()
-                                    .fill(Color.playfield)
+                                    .fill(Color(named: "playfield"))
                                     .frame(width: proxy.gridMetrics().boardSize, height: proxy.gridMetrics().boardSize, alignment: .center)
                                     .clipped()
                                     .cornerRadius(6)
@@ -138,17 +143,33 @@ struct GameView : View {
                     Button("New Game", action: { self.gameLogic.newGame() })
                         .padding(6)
                         .font(Font.system(size: 32).weight(.black))
-                        .foregroundColor(Color.pBackground)
+                        .foregroundColor(Color(named: "primaryBackground"))
                         .background(
-                            Rectangle().fill(Color.p512)
+                            Rectangle().fill(Color(named: "512p"))
                     )
                         .cornerRadius(6)
                         .offset(layoutTraits.newOffset)
                     
+                    if self.gameLogic.moveHistory.count > 0 {
+                        Button("Insights", action: {
+                            self.insightsPresented = true
+                        })
+                            .padding(6)
+                            .font(Font.system(size: 26).weight(.black))
+                            .foregroundColor(Color(named: "primaryBackground"))
+                            .background(
+                                Rectangle().fill(Color(named: "16384p"))
+                        )
+                            .cornerRadius(6)
+                            .offset(layoutTraits.insightsOffset)
+                            .sheet(isPresented: self.$insightsPresented, onDismiss: { self.insightsPresented = false}) {
+                                InsightsView(gameLogic: self.gameLogic)
+                        }
+                    }
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
                 .background(
-                    Rectangle().fill(Color.pBackground)
+                    Rectangle().fill(Color(named: self.gameLogic.largestNumberColor)).opacity(0.25)
                 )
             }
         }

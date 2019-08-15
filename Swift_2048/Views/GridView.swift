@@ -116,7 +116,7 @@ struct GridView : View {
         .frame(width: proxy.gridMetrics().boardSize, height: proxy.gridMetrics().boardSize, alignment: .center)
         .background(
             Rectangle()
-                .fill(Color.playfield)
+                .fill(Color(named: "playfield"))
         )
         .clipped()
         .cornerRadius(6)
