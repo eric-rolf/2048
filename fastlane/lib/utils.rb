@@ -50,3 +50,19 @@ def get_version_short_string(path)
   plist_hash = info_plist_to_hash path
   plist_hash['CFBundleShortVersionString']
 end
+
+def ensure_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+  create_keychain(
+    name: name,
+    password: ENV["KEYCHAIN_PASSWORD"],
+    unlock: true,
+    timeout: false
+  )
+end
+
+def clear_temp_keychain(name)
+  delete_keychain(name: name) 
+end

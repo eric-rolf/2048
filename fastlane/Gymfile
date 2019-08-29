@@ -6,9 +6,10 @@
 
 # Remove the # in front of the line to enable the option
 
-scheme("Swift_2048")
+scheme(ENV["SCHEME"])
+sdk(ENV["SKD"])
 
-sdk("iphoneos13.0")
+include_bitcode(true)
+include_symbols(true)
 
-output_directory("./")
-output_name("Swift2048")
+output_directory(ENV["OUTPUT"])

@@ -13,10 +13,20 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+###########################
+#       LOAD SECTION      #
+###########################
+
+#$:.unshift File.dirname(__FILE__)
+require './lib/utils.rb'
+
 default_platform(:ios)
 
 platform :ios do
 
+  ###########################
+  #       TEST SECTION      #
+  ###########################
   desc "Run Test"
   lane :tests do
     scan(
@@ -41,16 +51,89 @@ platform :ios do
     ui_tests
   end
 
-  desc "Just Building"
-  lane :build do
-    ensure_git_status_clean
-    gym(configuration: 'Debug')
-    reset_git_repo
+  ###########################
+  #   PROVISIONS SECTION    #
+  ###########################
+
+  desc "Get Dev Certs"
+  lane :development_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'development', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+  end
+
+  desc "Get AdHoc Certs"
+  lane :adhoc_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'adhoc', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+  end
+
+  desc "Get Enterprise Certs"
+  lane :enteprise_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'enterprise', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+  end
+
+  desc "Get App Store Certs"
+  lane :app_store_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'appstore', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+  end
+
+  ##MAKE PROVISIONS
+
+  desc "Gen Dev Certs"
+  lane :gen_development_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'development', keychain_name: ENV["KEYCHAIN_NAME"])
+  end
+
+  desc "Gen AdHoc Certs"
+  lane :gen_adhoc_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'adhoc', keychain_name: ENV["KEYCHAIN_NAME"])
+  end
+
+  desc "Gen Enterprise Certs"
+  lane :gen_enteprise_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'enterprise', keychain_name: ENV["KEYCHAIN_NAME"])
+  end
+
+  desc "Gen App Store Certs"
+  lane :gen_app_store_certs do
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'appstore', keychain_name: ENV["KEYCHAIN_NAME"])
+  end
+
+  ###########################
+  #      BUILD SECTION      #
+  ###########################
+
+  desc "Building Adhoc Debug"
+  lane :build_debug do
+    #ensure_git_status_clean
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'adhoc', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+    gym(configuration: 'Debug', export_method: 'ad-hoc', silent: false)
+    clear_temp_keychain ENV["KEYCHAIN_NAME"]
+    #reset_git_repo
+  end
+
+  desc "Building Enterprise Debug"
+  lane :build_enterprise_debug do
+    #ensure_git_status_clean
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'enterprise', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+    gym(configuration: 'Debug', export_method: 'enterprise', silent: false)
+    clear_temp_keychain ENV["KEYCHAIN_NAME"]
+    #reset_git_repo
   end
 
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    build_app(scheme: "Swift_2048")
+    ensure_temp_keychain ENV["KEYCHAIN_NAME"]
+    match(type: 'appstore', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
+    gym(configuration: 'Release', export_method: 'app-store', silent: false)
     upload_to_testflight
   end
 end
