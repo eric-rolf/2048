@@ -31,6 +31,11 @@ Run UI Test
 fastlane ios all_tests
 ```
 Run All Test
+### ios clear_keychain
+```
+fastlane ios clear_keychain
+```
+Get Dev Certs
 ### ios development_certs
 ```
 fastlane ios development_certs

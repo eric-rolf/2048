@@ -56,6 +56,11 @@ platform :ios do
   ###########################
 
   desc "Get Dev Certs"
+  lane :clear_keychain do
+    clear_temp_keychain ENV["KEYCHAIN_NAME"]
+  end
+
+  desc "Get Dev Certs"
   lane :development_certs do
     ensure_temp_keychain ENV["KEYCHAIN_NAME"]
     match(type: 'development', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
@@ -135,5 +140,6 @@ platform :ios do
     match(type: 'appstore', keychain_name: ENV["KEYCHAIN_NAME"], readonly: true)
     gym(configuration: 'Release', export_method: 'app-store', silent: false)
     upload_to_testflight
+    clear_temp_keychain ENV["KEYCHAIN_NAME"]
   end
 end
