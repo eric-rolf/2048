@@ -76,6 +76,11 @@ Gen Enterprise Certs
 fastlane ios gen_app_store_certs
 ```
 Gen App Store Certs
+### ios build_ci
+```
+fastlane ios build_ci
+```
+Building CI
 ### ios build_debug
 ```
 fastlane ios build_debug

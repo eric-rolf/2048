@@ -114,6 +114,14 @@ platform :ios do
   #      BUILD SECTION      #
   ###########################
 
+  desc "Building CI"
+  lane :build_ci do
+    #ensure_git_status_clean
+    all_tests
+    gym(configuration: 'Debug', skip_archive: true, skip_package_ipa: true, silent: false)
+    #reset_git_repo
+  end
+
   desc "Building Adhoc Debug"
   lane :build_debug do
     #ensure_git_status_clean
