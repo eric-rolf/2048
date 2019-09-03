@@ -56,26 +56,11 @@ Get Enterprise Certs
 fastlane ios app_store_certs
 ```
 Get App Store Certs
-### ios gen_development_certs
+### ios certs_for_env
 ```
-fastlane ios gen_development_certs
+fastlane ios certs_for_env
 ```
-Gen Dev Certs
-### ios gen_adhoc_certs
-```
-fastlane ios gen_adhoc_certs
-```
-Gen AdHoc Certs
-### ios gen_enteprise_certs
-```
-fastlane ios gen_enteprise_certs
-```
-Gen Enterprise Certs
-### ios gen_app_store_certs
-```
-fastlane ios gen_app_store_certs
-```
-Gen App Store Certs
+Get Certs for Env [development | adhoc | enterprise | appstore]
 ### ios build_ci
 ```
 fastlane ios build_ci
