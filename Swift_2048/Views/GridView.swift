@@ -9,40 +9,39 @@
 import SwiftUI
 
 /// ViewModifier that scales from an anchor point.
-struct AnchoredScale : ViewModifier {
-    
+struct AnchoredScale: ViewModifier {
+
     let scaleFactor: CGFloat
     let anchor: UnitPoint
-    
+
     func body(content: Self.Content) -> some View {
         content.scaleEffect(scaleFactor, anchor: anchor)
     }
-    
+
 }
 
-
 /// Allows concatted ViewModifiers.
-struct MergedViewModifier<M1, M2> : ViewModifier where M1: ViewModifier, M2: ViewModifier {
-    
+struct MergedViewModifier<M1, M2>: ViewModifier where M1: ViewModifier, M2: ViewModifier {
+
     let m1: M1
     let m2: M2
-    
+
     init(first: M1, second: M2) {
         m1 = first
         m2 = second
     }
-    
+
     func body(content: Self.Content) -> some View {
         content.modifier(m1).modifier(m2)
     }
-    
+
 }
 
 extension AnyTransition {
-    
+
     static func blockGenerated(from: Edge, position: CGPoint, `in`: CGRect) -> AnyTransition {
         let anchor = UnitPoint(x: position.x / `in`.width, y: position.y / `in`.height)
-        
+
         return .asymmetric(
             insertion: AnyTransition.opacity.combined(with: .move(edge: from)),
             removal: AnyTransition.opacity.combined(with: .modifier(
@@ -57,18 +56,18 @@ extension AnyTransition {
             ))
         )
     }
-    
+
 }
 
-struct GridView : View {
-    
+struct GridView: View {
+
     typealias SupportingMatrix = MatrixBlock<BlockIdentified>
-    
+
     let matrix: Self.SupportingMatrix
     let blockEnterEdge: Edge
     let proxy: GeometryProxy
     let boardSize: CGFloat = 0
-    
+
     func createBlock(_ block: BlockIdentified?, at index: IndexedBlock<BlockIdentified>.Index) -> some View {
         let blockView: BlockView
         if let block = block {
@@ -76,16 +75,16 @@ struct GridView : View {
         } else {
             blockView = BlockView.blank()
         }
-        
+
         let blockSize: CGFloat = proxy.gridMetrics().blockSize
         let boardSize: CGFloat = proxy.gridMetrics().boardSize
         let spacing: CGFloat = proxy.gridMetrics().spacing
-        
+
         let position = CGPoint(
             x: CGFloat(index.0) * (blockSize + spacing) + blockSize / 2 + spacing,
             y: CGFloat(index.1) * (blockSize + spacing) + blockSize / 2 + spacing
         )
-        
+
         return blockView
             .frame(width: blockSize, height: blockSize, alignment: .center)
             .position(x: position.x, y: position.y)
@@ -95,7 +94,7 @@ struct GridView : View {
                 in: CGRect(x: 0, y: 0, width: boardSize, height: boardSize)
             ))
     }
-    
+
     var body: some View {
         ZStack(alignment: .center) {
             // Background grid blocks:
@@ -105,7 +104,7 @@ struct GridView : View {
                 }
             }
             .zIndex(1.0)
-            
+
             // Number blocks:
             ForEach(self.matrix.flatten, id: \.item.id) {
                 self.createBlock($0.item, at: $0.index)
@@ -122,12 +121,12 @@ struct GridView : View {
         .cornerRadius(6)
         .drawingGroup(opaque: false, colorMode: .linear)
     }
-    
+
 }
 
 #if DEBUG
-struct BlockGridView_Previews : PreviewProvider {
-    
+struct BlockGridView_Previews: PreviewProvider {
+
     static var matrix: GridView.SupportingMatrix {
         var _matrix = GridView.SupportingMatrix()
         _matrix.place(BlockIdentified(id: 1, number: 2), to: (2, 0))
@@ -140,13 +139,13 @@ struct BlockGridView_Previews : PreviewProvider {
         _matrix.place(BlockIdentified(id: 8, number: 8), to: (1, 3))
         return _matrix
     }
-    
+
     static var previews: some View {
         GeometryReader { proxy in
             GridView(matrix: matrix, blockEnterEdge: .top, proxy: proxy)
                 .previewLayout(.sizeThatFits)
         }
     }
-    
+
 }
 #endif

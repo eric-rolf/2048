@@ -23,12 +23,12 @@ extension Edge {
     }
 }
 
-struct GameView : View {
-    
+struct GameView: View {
+
     @State var ignoreGesture = false
     @State var insightsPresented = false
     @ObservedObject var gameLogic: Logic = Logic()
-    
+
     fileprivate struct LayoutTraits {
         let bannerOffset: CGSize
         let newOffset: CGSize
@@ -36,10 +36,10 @@ struct GameView : View {
         let scoreOffset: CGSize
         let insightsOffset: CGSize
     }
-    
+
     fileprivate func layoutTraits(`for` proxy: GeometryProxy) -> LayoutTraits {
         let landscape = proxy.size.width > proxy.size.height
-        
+
         return LayoutTraits(
             bannerOffset: landscape
                 ? .init(width: proxy.safeAreaInsets.leading + 32, height: 0)
@@ -56,11 +56,11 @@ struct GameView : View {
             : .init(width: 0, height: proxy.size.height - proxy.safeAreaInsets.bottom - 150)
         )
     }
-        
+
     var gesture: some Gesture {
         let threshold: CGFloat = 44
         let drag = DragGesture(minimumDistance: threshold)
-            .onChanged { v in
+            .onChanged { _ in
                 guard !self.ignoreGesture else { return }
                 self.ignoreGesture = true
         }
@@ -72,15 +72,15 @@ struct GameView : View {
                 self.ignoreGesture = false
             }
         }
-            
+
         return drag
     }
-    
+
     var content: some View {
         GeometryReader { proxy in
             bind(self.layoutTraits(for: proxy)) { layoutTraits in
                 ZStack(alignment: layoutTraits.containerAlignment) {
-                    VStack{
+                    VStack {
                         Text("2048")
                             .font(Font.system(size: 48).weight(.black))
                             .foregroundColor(Color(named: "primaryFont"))
@@ -88,7 +88,7 @@ struct GameView : View {
                             Text("Score")
                                 .font(Font.system(size: 16).weight(.medium))
                                 .foregroundColor(Color(named: "primaryBackground"))
-                            
+
                             Text("\(self.gameLogic.score)")
                                 .font(Font.system(size: 26).weight(.black))
                                 .foregroundColor(Color(named: "primaryBackground"))
@@ -102,19 +102,19 @@ struct GameView : View {
                             .cornerRadius(6)
                     }
                     .offset(layoutTraits.bannerOffset)
-                    
+
                     ZStack(alignment: .center) {
                         GridView(matrix: self.gameLogic.blockMatrix,
                                  blockEnterEdge: .from(self.gameLogic.lastGestureDirection),
                                  proxy: proxy)
-                        
+
                         if self.gameLogic.hasWon || self.gameLogic.hasLost {
                             ZStack(alignment: .center) {
                                 VStack {
                                     Text(self.gameLogic.hasWon ? "You Win!!" : self.gameLogic.hasLost ? "Game Over" : "")
                                         .font(Font.system(size: 48).weight(.black))
                                         .foregroundColor(Color(named: "primaryFont"))
-                                    
+
                                     if self.gameLogic.hasWon && self.gameLogic.continueGame == false {
                                         Button("Keep going", action: {
                                             self.gameLogic.continueGame = true
@@ -139,7 +139,7 @@ struct GameView : View {
                         }
                     }
                     .frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
-                    
+
                     Button("New Game", action: { self.gameLogic.newGame() })
                         .padding(6)
                         .font(Font.system(size: 32).weight(.black))
@@ -149,7 +149,7 @@ struct GameView : View {
                     )
                         .cornerRadius(6)
                         .offset(layoutTraits.newOffset)
-                    
+
                     if self.gameLogic.moveHistory.count > 0 {
                         Button("Insights", action: {
                             self.insightsPresented = true
@@ -162,9 +162,9 @@ struct GameView : View {
                         )
                             .cornerRadius(6)
                             .offset(layoutTraits.insightsOffset)
-                            .sheet(isPresented: self.$insightsPresented, onDismiss: { self.insightsPresented = false}) {
+                            .sheet(isPresented: self.$insightsPresented, onDismiss: { self.insightsPresented = false }, content: {
                                 InsightsView(gameLogic: self.gameLogic)
-                        }
+                            })
                     }
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
@@ -175,19 +175,19 @@ struct GameView : View {
         }
         .edgesIgnoringSafeArea(.all)
     }
-    
+
     var body: AnyView {
         return content.gesture(gesture, including: .all)>*
     }
-    
+
 }
 
 #if DEBUG
-struct GameView_Previews : PreviewProvider {
-    
+struct GameView_Previews: PreviewProvider {
+
     static var previews: some View {
         GameView().environmentObject(Logic())
     }
-    
+
 }
 #endif

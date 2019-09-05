@@ -16,6 +16,16 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
+### ios lint
+```
+fastlane ios lint
+```
+Linting
+### ios code_coverage
+```
+fastlane ios code_coverage
+```
+Code Coverage
 ### ios tests
 ```
 fastlane ios tests
@@ -35,27 +45,7 @@ Run All Test
 ```
 fastlane ios clear_keychain
 ```
-Get Dev Certs
-### ios development_certs
-```
-fastlane ios development_certs
-```
-Get Dev Certs
-### ios adhoc_certs
-```
-fastlane ios adhoc_certs
-```
-Get AdHoc Certs
-### ios enteprise_certs
-```
-fastlane ios enteprise_certs
-```
-Get Enterprise Certs
-### ios app_store_certs
-```
-fastlane ios app_store_certs
-```
-Get App Store Certs
+Clear Keychain
 ### ios certs_for_env
 ```
 fastlane ios certs_for_env

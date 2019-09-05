@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct InsightsView : View {
-    
+struct InsightsView: View {
+
     @ObservedObject var gameLogic: Logic
-    
+
     var body: some View {
-        
+
         GeometryReader { proxy in
             VStack {
                 if self.gameLogic.moveHistory.count > 0 {
@@ -35,15 +35,15 @@ struct InsightsView : View {
             Rectangle().fill((Color(named: self.gameLogic.largestNumberColor))).opacity(0.25)
         ).edgesIgnoringSafeArea(.all)
     }
-    
+
 }
 
 #if DEBUG
-struct InsightsView_Previews : PreviewProvider {
-    
+struct InsightsView_Previews: PreviewProvider {
+
     static var previews: some View {
         InsightsView(gameLogic: Logic())
     }
-    
+
 }
 #endif

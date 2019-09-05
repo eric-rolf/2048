@@ -9,20 +9,20 @@
 import SwiftUI
 
 struct BlockView: View {
-    
+
     private struct ColorPair {
         let primary: Color
         let secondary: Color
     }
-        
+
     fileprivate let number: Int?
     fileprivate let textId: String?
-    
+
     init(block: BlockIdentified) {
         self.number = block.number
         self.textId = "\(block.id):\(block.number)"
     }
-    
+
     private init() {
         self.number = nil
         self.textId = ""
@@ -30,11 +30,11 @@ struct BlockView: View {
     static func blank() -> Self {
         return self.init()
     }
-    
+
     private var numberText: String {
         return number.map(String.init) ?? ""
     }
-    
+
     private var fontSize: CGFloat {
         switch numberText.count {
         case 0...2:
@@ -47,17 +47,17 @@ struct BlockView: View {
             return 20
         }
     }
-    
+
     private var colorPair: ColorPair {
         guard let number = number else {
             return ColorPair(primary: Color(named: "emptyCell"), secondary: .black)
         }
-        
+
         return ColorPair(primary: Color(named: "\(number)p"), secondary: Color(named: "\(number)s"))
     }
-    
+
     // MARK: Body
-    
+
     var body: some View {
         ZStack {
             Rectangle()
@@ -74,14 +74,14 @@ struct BlockView: View {
         .clipped()
         .cornerRadius(6)
     }
-    
+
 }
 
 // MARK: - Previews
 
 #if DEBUG
-struct BlockView_Previews : PreviewProvider {
-    
+struct BlockView_Previews: PreviewProvider {
+
     static var previews: some View {
         Group {
             ForEach( (1...13).map { Int(pow(2.0, Double($0))) }, id: \.hashValue) { i in
@@ -91,6 +91,6 @@ struct BlockView_Previews : PreviewProvider {
             BlockView.blank().previewLayout(.sizeThatFits)
         }
     }
-    
+
 }
 #endif

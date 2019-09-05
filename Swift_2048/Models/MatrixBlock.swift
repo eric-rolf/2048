@@ -15,15 +15,15 @@ protocol Block {
 
 struct IndexedBlock<T> where T: Block {
     typealias Index = MatrixBlock<T>.Index
-    
+
     let index: Self.Index
     let item: T
 }
 
-struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
+struct MatrixBlock<T>: CustomDebugStringConvertible where T: Block {
     typealias Index = (Int, Int)
     private var matrix: [[T?]]
-    
+
     init() {
         matrix = [[T?]]()
         for _ in 0..<4 {
@@ -34,7 +34,7 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
             matrix.append(row)
         }
     }
-    
+
     var debugDescription: String {
         let v = matrix.compactMap { row -> String in
             row.compactMap {
@@ -43,7 +43,7 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
         }.joined(separator: "\n")
         return v
     }
-    
+
     var flatten: [IndexedBlock<T>] {
         return self.matrix.enumerated().flatMap { (y: Int, element: [T?]) in
             element.enumerated().compactMap { (x: Int, element: T?) in
@@ -52,25 +52,25 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
             }
         }
     }
-    
+
     subscript(index: Self.Index) -> T? {
         guard isIndexValid(index) else { return nil }
         guard let item = matrix[index.1][index.0] else { return nil }
         return item
     }
-    
+
     /// Move the block to specific location and leave the original location blank.
     /// - Parameter from: Source location
     /// - Parameter to: Destination location
     mutating func move(from: Self.Index, to: Self.Index) {
         guard isIndexValid(from) && isIndexValid(to) else { return }
-        
+
         guard let source = self[from] else { return }
-        
+
         matrix[to.1][to.0] = source
         matrix[from.1][from.0] = nil
     }
-    
+
     /// Move the block to specific location, change its value and leave the original location blank.
     /// - Parameter from: Source location
     /// - Parameter to: Destination location
@@ -78,22 +78,22 @@ struct MatrixBlock<T> : CustomDebugStringConvertible where T: Block {
     mutating func move(from: Self.Index, to: Self.Index, with newValue: T.Value) {
         guard isIndexValid(from) && isIndexValid(to) else { return }
         guard var source = self[from] else { return }
-        
+
         source.number = newValue
-        
+
         matrix[to.1][to.0] = source
         matrix[from.1][from.0] = nil
     }
-    
+
     /// Place a block to specific location.
     /// - Parameter block: The block to place
     /// - Parameter to: Destination location
     mutating func place(_ block: T?, to: Self.Index) {
         matrix[to.1][to.0] = block
     }
-    
+
     private func isIndexValid(_ index: Self.Index) -> Bool {
         return index.0 >= 0 && index.0 < 4 || index.1 >= 0 && index.1 < 4
     }
-    
+
 }

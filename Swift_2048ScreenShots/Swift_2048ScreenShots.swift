@@ -25,15 +25,15 @@ class Swift_2048ScreenShots: XCTestCase {
     func testPortraitScreenshots() {
         //let app = XCUIApplication()
         XCUIDevice.shared.orientation = .portrait
-        
+
         // Screen number onene
         snapshot("0-First-screen-portrait")
     }
-    
+
     func testLandscapeScreenshots() {
         //let app = XCUIApplication()
         XCUIDevice.shared.orientation = .landscapeLeft
-        
+
         // Screen number onene
         snapshot("0-First-screen-lanscape")
     }

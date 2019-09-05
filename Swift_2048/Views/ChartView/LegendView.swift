@@ -12,7 +12,7 @@ struct LegendView: View {
     private let legends: [Legend]
 
     init(bars: [Bar]) {
-        legends = bars.map{$0.legend}
+        legends = bars.map {$0.legend}
     }
 
     var body: some View {

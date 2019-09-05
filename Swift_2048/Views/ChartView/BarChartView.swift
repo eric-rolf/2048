@@ -18,8 +18,9 @@ struct BarChartView: View {
             } else {
                 VStack {
                     BarsView(bars: bars).padding(EdgeInsets(top: 0, leading: 60, bottom: 0, trailing: 60))
-                    Text("Movement Directions: \(Int(bars.map({ $0.value }).reduce(0, +)))").foregroundColor(Color(named: "primaryFont"))
-                    
+                    Text("Movement Directions: \(Int(bars.map({ $0.value }).reduce(0, +)))")
+                        .foregroundColor(Color(named: "primaryFont"))
+
                     LegendView(bars: bars)
                         .padding()
                         .accessibility(hidden: true)

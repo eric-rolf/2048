@@ -13,7 +13,6 @@
 		6455D1CB22E7520A006FD6DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6455D1CA22E7520A006FD6DE /* Assets.xcassets */; };
 		6455D1CE22E7520A006FD6DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6455D1CD22E7520A006FD6DE /* Preview Assets.xcassets */; };
 		6455D1D122E7520A006FD6DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6455D1CF22E7520A006FD6DE /* LaunchScreen.storyboard */; };
-		6455D1DC22E7520A006FD6DE /* Swift_2048Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1DB22E7520A006FD6DE /* Swift_2048Tests.swift */; };
 		6455D1E722E7520A006FD6DE /* Swift_2048UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1E622E7520A006FD6DE /* Swift_2048UITests.swift */; };
 		6455D1F922E75462006FD6DE /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1F822E75462006FD6DE /* Logic.swift */; };
 		6455D1FB22E754D2006FD6DE /* MatrixBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455D1FA22E754D2006FD6DE /* MatrixBlock.swift */; };
@@ -70,7 +69,6 @@
 		6455D1D022E7520A006FD6DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6455D1D222E7520A006FD6DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6455D1D722E7520A006FD6DE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6455D1DB22E7520A006FD6DE /* Swift_2048Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_2048Tests.swift; sourceTree = "<group>"; };
 		6455D1DD22E7520A006FD6DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6455D1E222E7520A006FD6DE /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6455D1E622E7520A006FD6DE /* Swift_2048UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_2048UITests.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 		6455D1DA22E7520A006FD6DE /* Swift_2048Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6455D1DB22E7520A006FD6DE /* Swift_2048Tests.swift */,
 				7E4BC58523145C1F0013B0AB /* FunctionalTests.swift */,
 				6455D1DD22E7520A006FD6DE /* Info.plist */,
 			);
@@ -447,7 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E4BC58623145C1F0013B0AB /* FunctionalTests.swift in Sources */,
-				6455D1DC22E7520A006FD6DE /* Swift_2048Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -66,3 +66,19 @@ end
 def clear_temp_keychain(name)
   delete_keychain(name: name) 
 end
+
+# Get Configuration / Signing Type / Export Method For ENV
+def build_type_for_environment(env)
+
+
+
+end
+
+ENV_MAPPINGS {
+  "ci" => [],
+  "dev" => ["Debug", "adhoc", "ad-hoc"],
+  "qa" => ["Debug", "enterprise", "enterprise"],
+  "stage" => ["Debug", "enterprise", "enterprise"],
+  "fnf" => ["Release", "enterprise", "enterprise"],],
+  "prod" => ["Release", "enterprise", "enterprise"]
+}
