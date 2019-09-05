@@ -26,6 +26,11 @@ Linting
 fastlane ios code_coverage
 ```
 Code Coverage
+### ios screenshots
+```
+fastlane ios screenshots
+```
+Screen Shots
 ### ios tests
 ```
 fastlane ios tests
@@ -50,7 +55,7 @@ Clear Keychain
 ```
 fastlane ios certs_for_env
 ```
-Get Certs for Env [development | adhoc | enterprise | appstore]
+Get Certs for ENV [development | adhoc | enterprise | appstore]
 ### ios build_ci
 ```
 fastlane ios build_ci

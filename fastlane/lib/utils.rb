@@ -74,11 +74,11 @@ def build_type_for_environment(env)
 
 end
 
-ENV_MAPPINGS {
-  "ci" => [],
-  "dev" => ["Debug", "adhoc", "ad-hoc"],
-  "qa" => ["Debug", "enterprise", "enterprise"],
-  "stage" => ["Debug", "enterprise", "enterprise"],
-  "fnf" => ["Release", "enterprise", "enterprise"],],
-  "prod" => ["Release", "enterprise", "enterprise"]
-}
+# ENV_MAPPINGS {
+#   "ci" => [],
+#   "dev" => ["Debug", "adhoc", "ad-hoc"],
+#   "qa" => ["Debug", "enterprise", "enterprise"],
+#   "stage" => ["Debug", "enterprise", "enterprise"],
+#   "fnf" => ["Release", "enterprise", "enterprise"],
+#   "prod" => ["Release", "enterprise", "enterprise"]
+# }

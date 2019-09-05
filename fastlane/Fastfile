@@ -47,9 +47,13 @@ platform :ios do
       jenkins: true,
       output_directory: "reports/slather.html"
     )
-
   end
-  
+
+  desc "Screen Shots"
+  lane :screenshots do 
+    capture_screenshots
+  end
+
   ###########################
   #       TEST SECTION      #
   ###########################

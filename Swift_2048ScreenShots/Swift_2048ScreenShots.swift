@@ -23,18 +23,32 @@ class Swift_2048ScreenShots: XCTestCase {
     }
 
     func testPortraitScreenshots() {
-        //let app = XCUIApplication()
         XCUIDevice.shared.orientation = .portrait
-
-        // Screen number onene
+        
         snapshot("0-First-screen-portrait")
+        
+        navigateToInsights()
+        
+        snapshot("0-Insights-screen-portrait")
     }
 
     func testLandscapeScreenshots() {
-        //let app = XCUIApplication()
+        
         XCUIDevice.shared.orientation = .landscapeLeft
-
-        // Screen number onene
-        snapshot("0-First-screen-lanscape")
+        
+        snapshot("0-Main-screen-lanscape")
+        
+        navigateToInsights()
+        
+        snapshot("0-Insights-screen-landscape")
     }
+    
+    func navigateToInsights() {
+        let app = XCUIApplication()
+        app.swipeRight()
+        app.swipeDown()
+        app.buttons["Insights"].tap()
+        
+    }
+
 }
